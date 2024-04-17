@@ -254,7 +254,7 @@ const legend = L.control({ position: "bottomleft" });
 legend.onAdd = function () {
   let div = L.DomUtil.create("div", "description");
   L.DomEvent.disableClickPropagation(div);
-  const text = `<b>Паводки | Казанскй р-н</b> <br><br> красные дома подвержены угрозе затопления, основываясь на документе по <a href="https://ibb.co/F5fHs9n">ссылке</a> <br> <br> акуализировать информацию на карте пишите в тг: <a href="https://t.me/enegue_kr">@enegue_kr</a>`;
+  const text = `<b>Наводнение | Казанскй р-н</b> <br><br> красные дома подвержены угрозе затопления, основываясь на документе по <a href="https://ibb.co/F5fHs9n">ссылке</a> <br> <br> акуализировать информацию на карте пишите в тг: <a href="https://t.me/enegue_kr">@enegue_kr</a>`;
   div.insertAdjacentHTML("beforeend", text);
   return div;
 };
