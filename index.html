@@ -24,12 +24,40 @@
       max-width: 100%;
       max-height: 100%;
     }
+.header_inner { /*иннер этот нужен лишь для создания флексов 
+  тк необходим родитель т.е он расползся в строчку  не столбец*/
+  display: flex;
+  justify-content: space-between; /* переместило навигациювправо*/
+  align-items: center; /* выровняли лого и nav по центру*/
+}
+.header_logo{
+  font-size: 18px;
+  font-weight: 400;
+  color:white;
+  margin-left: 600px;
+  margin-bottom: 5px;
+  display: inline-block;
+}
   </style>
 
 	
 </head>
 <body>
+<header class="header">
+    <div class="header_inner ">
+      <div class="header_logo ">
+        <div class="col-11">Исторический облик г. Тюмень</div>
+        <!-- <img src="./img/Wapen_Tjoemen.png" alt=""> -->
+      </div>
+      <nav class="nav">
+        <!-- <a class="nav_link" href="#">Я ещё не придумал</a>
+        <a class="nav_link" href="#">Я ещё не придумал</a>
+        <a class="nav_link" href="#">Я ещё не придумал</a> -->
+      </nav>
+    </div>
 
+  </header>
+	
 <div id='map'></div>
 
 <script src="sample-geojson.js" type="text/javascript"></script>
