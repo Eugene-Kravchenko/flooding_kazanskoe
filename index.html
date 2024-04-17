@@ -254,7 +254,7 @@ const legend = L.control({ position: "bottomleft" });
 legend.onAdd = function () {
   let div = L.DomUtil.create("div", "description");
   L.DomEvent.disableClickPropagation(div);
-  const text = `<b>Паводки | Казанскй р-н</b> <br> красные дома на карте подверждены угрозе затопления, основываясь на документе по <a href="https://ibb.co/F5fHs9n">ссылке</a> <br> <br> на данный момент информация есть по Казанскому, Новоселезнево, Афонькино`;
+  const text = `<b>Паводки | Казанскй р-н</b> <br><br> красные дома подверждены угрозе затопления, основываясь на документе по <a href="https://ibb.co/F5fHs9n">ссылке</a> <br> <br> акуализировать информацию на карте пишите в тг: <a href="https://t.me/enegue_kr">@enegue_kr</a>`;
   div.insertAdjacentHTML("beforeend", text);
   return div;
 };
