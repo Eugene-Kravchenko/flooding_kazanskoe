@@ -6,7 +6,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>GeoJSON tutorial - Leaflet</title>
+  <title>Паводки | Казанский район</title>
+
 
   <link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" />
 
@@ -49,37 +50,31 @@
 
 </head>
 <body>
-  <header class="header">
-    <div class="header_inner ">
-      <div class="header_logo ">
-        <div class="col-11">Паводки в Казанском районе</div>
-        <!-- <img src="./img/Wapen_Tjoemen.png" alt=""> -->
-      </div>
-      <nav class="nav">
-        <!-- <a class="nav_link" href="#">Я ещё не придумал</a>
-        <a class="nav_link" href="#">Я ещё не придумал</a>
-        <a class="nav_link" href="#">Я ещё не придумал</a> -->
-      </nav>
-    </div>
-
-  </header>
+  
 <div id='map'></div>
 
-<script src="sample-geojson.js" type="text/javascript"></script>
+<!-- <script src="sample-geojson.js" type="text/javascript"></script> -->
 
 <script>
-  let map = L.map('map', { zoomControl: false }).setView([55.5, 69.09], 8);
+  let map = L.map('map', { zoomControl: false }).setView([55.63, 69.22], 11.5);
 
   let OpenStreetMap_Mapnik = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-  }).addTo(map);
-// ЗДАНИЯ
-  const buildings_kz = 'buildings_kz.geojson'
-  let adm_in = false
-  let min2 = 0
-  let max2 = 0
-  let filters2 = {}
+  });
+
+  var OpenTopoMap = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+	maxZoom: 17,
+	attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
+}).addTo(map);
+
+
+// ЗДАНИЯ ----------------------------------
+  const buildings_kz = 'buildings_kz_danger.geojson'
+  // let adm_in = false
+  // let min2 = 0
+  // let max2 = 0
+  // let filters2 = {}
   fetch(buildings_kz, {
     method: 'GET'
   })
@@ -94,10 +89,46 @@
       style: (feature) => {
         return {
           // fillColor: getColor(feature.properties.year_int),
-          weight: 1,
+          stroke: false,
+          weight: 2,
+          color: 'red',
+          dashArray: '0',
+          fill: 1,
+          fillOpacity: 1
+        }
+      },
+    }).addTo(map)
+  })
+
+  .catch(err=> {
+    console.log('errorr'+err)
+  })
+  //  ----------------------------------
+
+  // ------------------ADM ------------------------
+
+  const kz_region = 'kz_region.geojson'
+
+  fetch(kz_region, {
+    method: 'GET'
+  })
+
+  .then(response =>{
+    return response.json()
+  })
+
+  .then(json => {
+    console.log(json)
+    adm_in = L.geoJSON(json, {
+      style: (feature) => {
+        return {
+          // fillColor: getColor(feature.properties.year_int),
+          stroke: true,
+          Ccolor: "gray",
+          weight: 5,
           opacity: 1,
-          color: 'grey',
-          dashArray: '3',
+          color: 'gray',
+          dashArray: '0',
           fill: 0,
         }
       },
@@ -107,6 +138,80 @@
   .catch(err=> {
     console.log('errorr'+err)
   })
+  //  ----------------------------------
+
+
+  // ------------------ДАМБАА ------------------------
+
+  const damba = 'damba.geojson'
+
+  fetch(damba, {
+    method: 'GET'
+  })
+
+  .then(response =>{
+    return response.json()
+  })
+
+  .then(json => {
+    console.log(json)
+    adm_in = L.geoJSON(json, {
+      style: (feature) => {
+        return {
+          // fillColor: getColor(feature.properties.year_int),
+          stroke: true,
+          // Ccolor: "gray",
+          weight: 5,
+          opacity: 1,
+          color: '#ff9e17',
+          dashArray: '0',
+          fill: 0,
+        }
+      },
+    }).addTo(map)
+  })
+
+  .catch(err=> {
+    console.log('errorr'+err)
+  })
+  //  ----------------------------------
+
+    // ------------------RIVER ------------------------
+
+    const river = 'river.geojson'
+
+fetch(river, {
+  method: 'GET'
+})
+
+.then(response =>{
+  return response.json()
+})
+
+.then(json => {
+  console.log(json)
+  adm_in = L.geoJSON(json, {
+    style: (feature) => {
+      return {
+        // fillColor: getColor(feature.properties.year_int),
+        stroke: true,
+        // Ccolor: "gray",
+        weight: 1,
+        opacity: 1,
+        fillColor: 'blue',
+        dashArray: '1',
+        fill: 1,
+      }
+    },
+  }).addTo(map)
+})
+
+.catch(err=> {
+  console.log('errorr'+err)
+})
+//  ----------------------------------
+
+
 </script>
 
 
