@@ -45,6 +45,21 @@
       margin-bottom: 15px;
       display: inline-block;
     }
+
+    .description {
+  width: 250px;
+  font-size: 16px;
+  color: #333;
+  padding: 10px 14px;
+  background-color: hsla(0, 0%, 100%, 0.8);
+  box-shadow: 0 0 15px rgb(0 0 0 / 20%);
+  border-radius: 5px;
+  line-height: 120%;
+  border: 1px solid grey;
+}
+.leaflet-control-attribution {
+  display: none;
+}
   </style>
 
 
@@ -69,6 +84,7 @@
 }).addTo(map);
 
 
+
 // ЗДАНИЯ ----------------------------------
   const buildings_kz = 'buildings_kz_danger.geojson'
   // let adm_in = false
@@ -84,7 +100,7 @@
   })
 
   .then(json => {
-    console.log(json)
+    // console.log(json)
     adm_in = L.geoJSON(json, {
       style: (feature) => {
         return {
@@ -101,7 +117,7 @@
   })
 
   .catch(err=> {
-    console.log('errorr'+err)
+    // console.log('errorr'+err)
   })
   //  ----------------------------------
 
@@ -118,7 +134,7 @@
   })
 
   .then(json => {
-    console.log(json)
+    // console.log(json)
     adm_in = L.geoJSON(json, {
       style: (feature) => {
         return {
@@ -136,7 +152,7 @@
   })
 
   .catch(err=> {
-    console.log('errorr'+err)
+    // console.log('errorr'+err)
   })
   //  ----------------------------------
 
@@ -154,14 +170,14 @@
   })
 
   .then(json => {
-    console.log(json)
+    // console.log(json)
     adm_in = L.geoJSON(json, {
       style: (feature) => {
         return {
           // fillColor: getColor(feature.properties.year_int),
           stroke: true,
           // Ccolor: "gray",
-          weight: 5,
+          weight: 6.1,
           opacity: 1,
           color: '#ff9e17',
           dashArray: '0',
@@ -172,7 +188,7 @@
   })
 
   .catch(err=> {
-    console.log('errorr'+err)
+    // console.log('errorr'+err)
   })
   //  ----------------------------------
 
@@ -189,7 +205,7 @@ fetch(river, {
 })
 
 .then(json => {
-  console.log(json)
+  // console.log(json)
   adm_in = L.geoJSON(json, {
     style: (feature) => {
       return {
@@ -207,10 +223,44 @@ fetch(river, {
 })
 
 .catch(err=> {
-  console.log('errorr'+err)
+  // console.log('errorr'+err)
 })
 //  ----------------------------------
 
+
+var red = L.icon({
+    iconUrl: 'red.png',
+    iconSize: [20,20], // size of the icon
+});
+var yellow = L.icon({
+    iconUrl: 'yellow.png',
+    iconSize: [20,20], // size of the icon
+});
+
+L.marker([55.643754, 69.248402], {icon: yellow}).addTo(map).bindPopup("<b>ПЕКАРНЯ - НУЖНЫ ВОЛОНТЕРЫ С 6:00</b>");;
+L.marker([55.632153, 69.243836], {icon: yellow}).addTo(map).bindPopup("<b>СОВХОЗНАЯ - НУЖНЫ ВОЛОНТЕРЫ С 6:00</b>");
+L.marker([55.596935, 69.286791], {icon: red}).addTo(map).bindPopup("<b>БОЛЬШИЕ ЯРКИ - ЭВАКУАЦИЯ</b>");
+L.marker([55.447386, 69.421066], {icon: red}).addTo(map).bindPopup("<b>АФОНЬКИНО - ЭВАКУАЦИЯ</b>");
+L.marker([55.423347, 69.445343], {icon: red}).addTo(map).bindPopup("<b>ПАЛЕНКА - ЭВАКУАЦИЯ</b>");
+
+
+
+
+// create legend
+// ------------------------------
+
+const legend = L.control({ position: "bottomleft" });
+
+legend.onAdd = function () {
+  let div = L.DomUtil.create("div", "description");
+  L.DomEvent.disableClickPropagation(div);
+  const text = `<b>Паводки | Казанскй р-н</b> <br> красные дома на карте подверждены угрозе затопления, основываясь на документе по <a href="https://ibb.co/F5fHs9n">ссылке</a> <br> <br> на данный момент информация есть по Казанскому, Новоселезнево, Афонькино`;
+  div.insertAdjacentHTML("beforeend", text);
+  return div;
+};
+legend.addTo(map);
+
+// ------------------------------
 
 </script>
 
