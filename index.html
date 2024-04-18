@@ -236,6 +236,10 @@ var yellow = L.icon({
     iconUrl: 'yellow.png',
     iconSize: [20,20], // size of the icon
 });
+var stop = L.icon({
+    iconUrl: 'stop.png',
+    iconSize: [20,20], // size of the icon
+});
 
 L.marker([55.643754, 69.248402], {icon: yellow}).addTo(map).bindPopup("<b>ПЕКАРНЯ - НУЖНЫ ВОЛОНТЕРЫ С 6:00</b>");;
 L.marker([55.632153, 69.243836], {icon: yellow}).addTo(map).bindPopup("<b>СОВХОЗНАЯ - НУЖНЫ ВОЛОНТЕРЫ С 6:00</b>");
@@ -247,6 +251,7 @@ L.marker([55.659019, 69.222413], {icon: yellow}).addTo(map).bindPopup("<b>НУЖ
 L.marker([55.770173, 69.318541], {icon: yellow}).addTo(map).bindPopup("<b>ОГНЕВО - НУЖНА ПОМОЩЬ ДЛЯ СТРОИТЕЛЬСТВА ДАМБЫ</b>");
 L.marker([55.609513, 69.315394], {icon: red}).addTo(map).bindPopup("<b>МАЛЫЕ ЯРКИ - ЭВАКУАЦИЯ</b>");
 
+L.marker([55.706120, 69.192136], {icon: stop}).addTo(map).bindPopup("<b>ТРАССА ПЕРЕКРЫТ - ЗАТОПЛЕНО</b>");
 
 
 
